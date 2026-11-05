@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="it" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life & Time Balance Tool | Digital Creator Lab</title>
+
+    <!-- Social Meta Tags (Open Graph) -->
+    <meta name="description" content="Scopri quanto tempo libero hai davvero ogni settimana e trasforma i tuoi obiettivi in azione.">
+    <meta property="og:title" content="Life & Time Balance Tool | Digital Creator Lab">
+    <meta property="og:description" content="Calcolatore delle 168 ore e generatore di micro-azioni per creator e professionisti.">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom range slider styling for sleek UI */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #e5e7eb;
+            border-radius: 9999px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -7px;
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+            transition: transform 0.15s ease, background-color 0.15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            background: #059669;
+        }
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #e5e7eb;
+            border-radius: 9999px;
+        }
+        input[type=range]::-moz-range-thumb {
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-emerald-50 via-white to-gray-50 text-gray-900 min-h-full font-sans antialiased pb-12">
+
+    <!-- Container wrapper with 9:16 mobile optimization & desktop max-width -->
+    <div class="max-w-xl mx-auto px-4 py-6 sm:px-6">
+
+        <!-- Header Section -->
+        <header class="text-center mb-6 relative">
+            <div class="flex items-center justify-between mb-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full uppercase tracking-wider shadow-sm">
+                    <i class="fa-solid fa-bolt"></i> Digital Creator Lab
+                </div>
+                <!-- User Guide Button Header -->
+                <button onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 px-3 py-1 bg-white hover:bg-emerald-50 border border-emerald-300 text-emerald-700 text-xs font-bold rounded-full shadow-sm transition-all hover:scale-105">
+                    <i class="fa-solid fa-book-open"></i> Guida Utente
+                </button>
+            </div>
+            
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight leading-tight">
+                Life & Time Balance Tool
+            </h1>
+            <p class="text-sm text-gray-600 mt-1 max-w-md mx-auto">
+                Scopri quanto tempo hai davvero per i tuoi obiettivi e ottimizzi la tua settimana.
+            </p>
+        </header>
+
+        <!-- Top WhatsApp Community Banner -->
+        <div class="bg-emerald-500 text-white rounded-2xl p-4 mb-6 shadow-md hover:shadow-lg transition-all flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div class="flex items-center gap-3">
+                <div class="bg-white/20 p-2.5 rounded-xl shrink-0">
+                    <i class="fa-brands fa-whatsapp text-2xl text-white"></i>
+                </div>
+                <div>
+                    <h2 class="font-bold text-sm sm:text-base leading-snug">Canale WhatsApp Ufficiale</h2>
+                    <p class="text-xs text-emerald-100">Guide, app e risorse 100% gratuite ogni settimana</p>
+                </div>
+            </div>
+            <a href="https://whatsapp.com/channel/0029Vb8tqXaB4hdRxxjPkp3C" target="_blank" rel="noopener noreferrer" 
+               class="bg-white text-emerald-700 hover:bg-emerald-50 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shadow transition-colors whitespace-nowrap w-full sm:w-auto">
+                Unisciti Gratis <i class="fa-solid fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+
+        <!-- SECTION 1: 168-Hour Calculator Card -->
+        <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-lg border border-gray-100 mb-6">
+            <div class="flex items-center justify-between mb-4 border-b border-gray-100 pb-3">
+                <h2 class="font-bold text-gray-800 text-base sm:text-lg flex items-center gap-2">
+                    <i class="fa-regular fa-clock text-emerald-500"></i> Calcolatore 168 Ore
+                </h2>
+                <span class="text-xs font-semibold px-2.5 py-1 bg-gray-100 text-gray-600 rounded-lg">Totale: 168h/sett.</span>
+            </div>
+
+            <!-- Input Sliders Grid -->
+            <div class="space-y-4">
+                
+                <!-- 1. Sonno -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs sm:text-sm">
+                        <label for="sleep" class="font-semibold text-gray-700 flex items-center gap-2">
+                            <span>😴</span> Sonno (riposo notturno)
+                        </label>
+                        <div class="flex items-center gap-1">
+                            <input type="number" id="sleepNum" min="0" max="168" value="56" class="w-14 text-right font-bold text-emerald-600 bg-emerald-50 rounded border border-emerald-200 px-1.5 py-0.5 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                            <span class="text-gray-500 text-xs">h/sett (<span id="sleepDaily">8</span>h/gg)</span>
+                        </div>
+                    </div>
+                    <input type="range" id="sleep" min="0" max="112" value="56" step="1">
+                </div>
+
+                <!-- 2. Lavoro / Studio -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs sm:text-sm">
+                        <label for="work" class="font-semibold text-gray-700 flex items-center gap-2">
+                            <span>💼</span> Lavoro / Studio principale
+                        </label>
+                        <div class="flex items-center gap-1">
+                            <input type="number" id="workNum" min="0" max="168" value="40" class="w-14 text-right font-bold text-emerald-600 bg-emerald-50 rounded border border-emerald-200 px-1.5 py-0.5 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                            <span class="text-gray-500 text-xs">h/sett</span>
+                        </div>
+                    </div>
+                    <input type="range" id="work" min="0" max="112" value="40" step="1">
+                </div>
+
+                <!-- 3. Spostamenti & Routine -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs sm:text-sm">
+                        <label for="routine" class="font-semibold text-gray-700 flex items-center gap-2">
+                            <span>🚗</span> Traffico, Spostamenti & Faccende
+                        </label>
+                        <div class="flex items-center gap-1">
+                            <input type="number" id="routineNum" min="0" max="168" value="14" class="w-14 text-right font-bold text-emerald-600 bg-emerald-50 rounded border border-emerald-200 px-1.5 py-0.5 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                            <span class="text-gray-500 text-xs">h/sett</span>
+                        </div>
+                    </div>
+                    <input type="range" id="routine" min="0" max="84" value="14" step="1">
+                </div>
+
+                <!-- 4. Pasti & Famiglia -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs sm:text-sm">
+                        <label for="family" class="font-semibold text-gray-700 flex items-center gap-2">
+                            <span>🍽️</span> Pasti, Famiglia & Cura Personale
+                        </label>
+                        <div class="flex items-center gap-1">
+                            <input type="number" id="familyNum" min="0" max="168" value="14" class="w-14 text-right font-bold text-emerald-600 bg-emerald-50 rounded border border-emerald-200 px-1.5 py-0.5 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                            <span class="text-gray-500 text-xs">h/sett</span>
+                        </div>
+                    </div>
+                    <input type="range" id="family" min="0" max="84" value="14" step="1">
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: Real-time Dashboard & Diagnostics -->
+        <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-lg border border-gray-100 mb-6 space-y-5">
+            <div>
+                <div class="flex justify-between items-center text-xs font-bold text-gray-600 mb-1.5">
+                    <span>Uso del tempo settimanale</span>
+                    <span id="occupiedPercentage">73% occupato</span>
+                </div>
+                <!-- Progress Bar -->
+                <div class="w-full h-3.5 bg-gray-100 rounded-full overflow-hidden p-0.5 border border-gray-200">
+                    <div id="progressBar" class="h-full bg-emerald-500 rounded-full transition-all duration-300 w-[73%]"></div>
+                </div>
+            </div>
+
+            <!-- Prominent Result Highlight Box -->
+            <div id="resultCard" class="bg-emerald-50 border-2 border-emerald-400 rounded-xl p-4 text-center transition-colors">
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Tempo Libero Disponibile</span>
+                <div class="text-3xl sm:text-4xl font-black text-emerald-600 my-1" id="freeHoursDisplay">
+                    44 ore <span class="text-base font-medium text-gray-600">/ sett</span>
+                </div>
+                <div class="text-xs sm:text-sm font-semibold text-gray-700" id="dailyFreeHoursDisplay">
+                    Circa 6.3 ore al giorno a tua disposizione
+                </div>
+            </div>
+
+            <!-- Profile & Diagnostic -->
+            <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                <div class="flex items-center gap-2 mb-1.5">
+                    <span class="text-xs font-bold uppercase text-gray-500">Diagnosi del tuo profilo:</span>
+                </div>
+                <h3 id="profileTitle" class="text-base font-extrabold text-emerald-600 mb-1">
+                    🚀 Massimo Potenziale
+                </h3>
+                <p id="profileAdvice" class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                    Hai un'eccellente finestra di tempo libero. Non hai scuse: incanala questa energia per creare contenuti virali, lanciare il tuo business o acquisire competenze ad alto valore.
+                </p>
+            </div>
+
+            <button onclick="copySummary()" class="w-full py-2.5 px-4 bg-gray-900 hover:bg-gray-800 text-white rounded-xl text-xs sm:text-sm font-bold shadow flex items-center justify-center gap-2 transition-colors">
+                <i class="fa-regular fa-copy"></i> Copia il tuo Riepilogo per le Note
+            </button>
+        </section>
+
+        <!-- SECTION 3: Objective Converter (Goal Feasibility) -->
+        <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-lg border border-gray-100 mb-6">
+            <h2 class="font-bold text-gray-800 text-base sm:text-lg mb-4 flex items-center gap-2 border-b border-gray-100 pb-3">
+                <i class="fa-solid fa-bullseye text-emerald-500"></i> Convertitore di Obiettivi
+            </h2>
+
+            <div class="space-y-4">
+                <div>
+                    <label for="goalSelect" class="block text-xs font-bold text-gray-700 uppercase mb-1">Seleziona il tuo Obiettivo:</label>
+                    <select id="goalSelect" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs sm:text-sm font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        <option value="video">🎬 Creare Video & Content Creation (Short/Reel)</option>
+                        <option value="books">📚 Leggere Libri & Formazione Personale</option>
+                        <option value="fitness">🏋️ Fitness, Salute & Allenamento</option>
+                        <option value="study">💻 Studio & Corsi Online</option>
+                        <option value="custom">🎯 Progetto Personale / Side-Hustle</option>
+                    </select>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center text-xs font-semibold text-gray-700 mb-1">
+                        <span>Ore dedicate a settimana:</span>
+                        <span id="goalHoursVal" class="text-emerald-600 font-bold text-sm">5 ore</span>
+                    </div>
+                    <input type="range" id="goalHours" min="1" max="30" value="5" step="1">
+                </div>
+
+                <!-- Feasibility Outcome Box -->
+                <div id="goalOutcome" class="p-3.5 bg-emerald-50 rounded-xl border border-emerald-200 text-xs sm:text-sm">
+                    <div class="font-bold text-emerald-800 flex items-center gap-1.5 mb-1" id="goalStatus">
+                        <i class="fa-solid fa-circle-check text-emerald-600"></i> Obiettivo Sostenibile!
+                    </div>
+                    <p id="goalDescription" class="text-gray-700 leading-snug">
+                        Dedicando 5 ore a settimana, puoi produrre con costanza 2-3 Short/Reel ben curati o 1 video lungo su YouTube.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: 15-Minute Micro-Action Generator -->
+        <section class="bg-gradient-to-br from-emerald-600 to-emerald-700 text-white rounded-2xl p-5 sm:p-6 shadow-lg mb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="font-extrabold text-base sm:text-lg flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-yellow-300"></i> Micro-Azione da 15 Minuti
+                </h2>
+                <span class="bg-white/20 text-xs font-bold px-2.5 py-0.5 rounded-full">Boost Immediato</span>
+            </div>
+            
+            <p class="text-xs sm:text-sm text-emerald-100 mb-4">
+                Poco tempo oggi? Sblocca una singola azione pratica a impatto immediato.
+            </p>
+
+            <div id="actionBox" class="bg-white text-gray-800 rounded-xl p-4 font-medium text-xs sm:text-sm shadow-inner mb-4 min-h-[70px] flex items-center justify-center text-center leading-relaxed">
+                "Scrivi 3 ganci psicologici (hook) d'impatto per i tuoi prossimi video brevi."
+            </div>
+
+            <button onclick="generateMicroAction()" class="w-full py-3 px-4 bg-yellow-400 hover:bg-yellow-300 text-gray-900 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-shuffle"></i> Genera Nuova Azione ⚡
+            </button>
+        </section>
+
+        <!-- Footer Banner & Credits -->
+        <footer class="text-center space-y-4">
+            <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm text-center">
+                <h3 class="font-bold text-gray-800 text-sm sm:text-base">Vuoi portare i tuoi contenuti al livello successivo?</h3>
+                <p class="text-xs text-gray-500 mt-1 mb-3">Entra gratis nella community ufficiale di Digital Creator Lab per template, guide ed app esclusive.</p>
+                <a href="https://whatsapp.com/channel/0029Vb8tqXaB4hdRxxjPkp3C" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm py-2.5 px-5 rounded-xl shadow transition-colors">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Unisciti al Canale WhatsApp
+                </a>
+            </div>
+            <p class="text-xs text-gray-400">
+                Powered by Digital Creator Lab &bull; PrimeVerseDigital
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- USER GUIDE MODAL -->
+    <div id="guideModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-gray-100 flex flex-col">
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-gray-100 flex justify-between items-center sticky top-0 bg-white/95 backdrop-blur z-10">
+                <h3 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-emerald-500"></i> Guida Utente & Strategie
+                </h3>
+                <button onclick="toggleModal(false)" class="text-gray-400 hover:text-gray-600 p-1.5 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="p-5 space-y-5 text-xs sm:text-sm text-gray-600">
+                
+                <!-- Section 1 -->
+                <div class="space-y-1.5">
+                    <h4 class="font-bold text-gray-800 flex items-center gap-2 text-sm sm:text-base">
+                        <span class="bg-emerald-100 text-emerald-800 w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-bold">1</span>
+                        Il Principio delle 168 Ore
+                    </h4>
+                    <p class="leading-relaxed">
+                        Ogni settimana ha esattamente **168 ore**. La maggior parte delle persone sovrastima il lavoro svolto e sottostima il tempo libero disperso in distrazioni. Regolando i 4 cursori principali (Sonno, Lavoro, Routine e Pasti), ottieni l'esatto saldo orario a tua disposizione.
+                    </p>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="space-y-1.5">
+                    <h4 class="font-bold text-gray-800 flex items-center gap-2 text-sm sm:text-base">
+                        <span class="bg-emerald-100 text-emerald-800 w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-bold">2</span>
+                        I 3 Profili di Diagnosi
+                    </h4>
+                    <ul class="space-y-2 pl-2">
+                        <li class="bg-amber-50 border border-amber-200 p-2.5 rounded-xl">
+                            <strong class="text-amber-800 font-bold block mb-0.5">⚠️ Modalità Sopravvivenza (&lt; 10h libere):</strong>
+                            Hai un margine ristretto. Elimina il superfluo o impara a delegare prima di aggiungere nuovi progetti.
+                        </li>
+                        <li class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl">
+                            <strong class="text-emerald-800 font-bold block mb-0.5">⚡ Costruttore Costante (10h - 25h libere):</strong>
+                            La finestra perfetta per far crescere un canale o una passione collaterale senza burnout.
+                        </li>
+                        <li class="bg-emerald-100 border border-emerald-300 p-2.5 rounded-xl">
+                            <strong class="text-emerald-900 font-bold block mb-0.5">🚀 Massimo Potenziale (&gt; 25h libere):</strong>
+                            Hai tutto il tempo necessario: la chiave ora è la pianificazione rigida e la disciplina.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="space-y-1.5">
+                    <h4 class="font-bold text-gray-800 flex items-center gap-2 text-sm sm:text-base">
+                        <span class="bg-emerald-100 text-emerald-800 w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-bold">3</span>
+                        Convertitore & Micro-Azioni
+                    </h4>
+                    <p class="leading-relaxed">
+                        Usa il **Convertitore di Obiettivi** per verificare se le ore pianificate sono realistiche. Quando ti senti bloccato o sopraffatto dalla procrastinazione, clicca su **Micro-Azione da 15 Minuti** per completare un singolo task veloce a forte impatto.
+                    </p>
+                </div>
+
+                <!-- Section 4 FAQ -->
+                <div class="bg-gray-50 border border-gray-200 p-3.5 rounded-xl space-y-2">
+                    <h5 class="font-bold text-gray-800 flex items-center gap-1.5">
+                        <i class="fa-regular fa-lightbulb text-yellow-500"></i> FAQ & Consigli per Creator
+                    </h5>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        <strong>Come mantenere la costanza?</strong> Lavora per blocchi di tempo (Time Blocking). Dedica 1-2 ore fisse alla creazione invece di aspettare il 'momento libero' casuale.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-gray-100 bg-gray-50 rounded-b-2xl text-center">
+                <button onclick="toggleModal(false)" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow transition-colors">
+                    Ho Capito, Inizia Ora! 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Component -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-gray-900 text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-xl opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 flex items-center gap-2 z-50">
+        <i class="fa-solid fa-check text-emerald-400"></i> <span id="toastMsg">Copiato negli appunti!</span>
+    </div>
+
+    <script>
+        // DOM Element references
+        const sleepInput = document.getElementById('sleep');
+        const sleepNum = document.getElementById('sleepNum');
+        const sleepDaily = document.getElementById('sleepDaily');
+
+        const workInput = document.getElementById('work');
+        const workNum = document.getElementById('workNum');
+
+        const routineInput = document.getElementById('routine');
+        const routineNum = document.getElementById('routineNum');
+
+        const familyInput = document.getElementById('family');
+        const familyNum = document.getElementById('familyNum');
+
+        const occupiedPercentage = document.getElementById('occupiedPercentage');
+        const progressBar = document.getElementById('progressBar');
+        const freeHoursDisplay = document.getElementById('freeHoursDisplay');
+        const dailyFreeHoursDisplay = document.getElementById('dailyFreeHoursDisplay');
+
+        const resultCard = document.getElementById('resultCard');
+        const profileTitle = document.getElementById('profileTitle');
+        const profileAdvice = document.getElementById('profileAdvice');
+
+        const goalSelect = document.getElementById('goalSelect');
+        const goalHoursInput = document.getElementById('goalHours');
+        const goalHoursVal = document.getElementById('goalHoursVal');
+        const goalStatus = document.getElementById('goalStatus');
+        const goalDescription = document.getElementById('goalDescription');
+        const goalOutcome = document.getElementById('goalOutcome');
+
+        // Modal Function
+        function toggleModal(show) {
+            const modal = document.getElementById('guideModal');
+            if (show) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.add('opacity-100');
+            } else {
+                modal.classList.remove('opacity-100');
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // Close Modal clicking outside
+        document.getElementById('guideModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleModal(false);
+            }
+        });
+
+        // Micro-actions database
+        const microActions = [
+            "Scrivi 3 ganci psicologici (hook) d'impatto per i tuoi prossimi video brevi.",
+            "Elimina le distrazioni sul telefono e metti la modalità 'Non Disturbare' per 15 minuti di lavoro focalizzato.",
+            "Pianifica le 3 priorità assolute di domani prima di andare a dormire.",
+            "Revisiona la tua lista di compiti ed elimina almeno 1 attività non essenziale.",
+            "Leggi 5 pagine di un libro sulla crescita personale o sul marketing.",
+            "Registra un audio di prova per allenare la tua chiarezza espositiva e la voce.",
+            "Pulisci la tua scrivania fisica o il desktop del PC per liberare spazio mentale.",
+            "Analizza un video virale della tua nicchia e segnati 2 elementi da replicare."
+        ];
+
+        // Goal explanations
+        const goalDescriptions = {
+            video: (hours) => `Dedicando ${hours}h a settimana, puoi produrre circa ${Math.max(1, Math.floor(hours * 0.6))} Short/Reel d'impatto con script e montaggio curato.`,
+            books: (hours) => `Con ${hours}h a settimana puoi leggere circa ${Math.round(hours * 25)} pagine, equivalenti a circa ${Math.max(1, Math.floor((hours * 25 * 4) / 200))} libro/i al mese!`,
+            fitness: (hours) => `Con ${hours}h a settimana garantisci ${Math.min(7, Math.floor(hours / 1.2))} sessioni di allenamento efficaci per migliorare energia e salute.`,
+            study: (hours) => `In 1 mese avrai accumulato ${hours * 4} ore di studio profondo, sufficienti per completare un corso professionale online.`,
+            custom: (hours) => `Investendo ${hours}h a settimana sul tuo progetto personale, accumulerai oltre ${hours * 52} ore all'anno di puro progresso.`
+        };
+
+        // Sync dual inputs (Range & Number)
+        function syncInputs(rangeEl, numEl, callback) {
+            rangeEl.addEventListener('input', () => {
+                numEl.value = rangeEl.value;
+                callback();
+            });
+            numEl.addEventListener('input', () => {
+                let val = parseInt(numEl.value) || 0;
+                if (val < 0) val = 0;
+                if (val > 168) val = 168;
+                rangeEl.value = val;
+                callback();
+            });
+        }
+
+        // Main Calculation Engine
+        function calculateBalance() {
+            const sleepVal = parseInt(sleepInput.value) || 0;
+            const workVal = parseInt(workInput.value) || 0;
+            const routineVal = parseInt(routineInput.value) || 0;
+            const familyVal = parseInt(familyInput.value) || 0;
+
+            // Update daily sleep display
+            sleepDaily.innerText = (sleepVal / 7).toFixed(1);
+
+            const totalOccupied = sleepVal + workVal + routineVal + familyVal;
+            const freeHours = 168 - totalOccupied;
+            const pct = Math.min(100, Math.round((totalOccupied / 168) * 100));
+
+            // UI updates for progress & results
+            occupiedPercentage.innerText = `${pct}% occupato`;
+            progressBar.style.width = `${pct}%`;
+
+            // Dynamic Progress Color
+            if (pct > 90) {
+                progressBar.className = "h-full bg-red-500 rounded-full transition-all duration-300";
+            } else if (pct > 75) {
+                progressBar.className = "h-full bg-amber-500 rounded-full transition-all duration-300";
+            } else {
+                progressBar.className = "h-full bg-emerald-500 rounded-full transition-all duration-300";
+            }
+
+            if (freeHours < 0) {
+                freeHoursDisplay.innerHTML = `<span class="text-red-600 font-bold">${freeHours} ore</span> <span class="text-xs text-red-500 font-normal">(Sovraccarico!)</span>`;
+                dailyFreeHoursDisplay.innerText = "Stai richiedendo più ore di quelle disponibili in una settimana!";
+                resultCard.className = "bg-red-50 border-2 border-red-300 rounded-xl p-4 text-center transition-colors";
+                
+                profileTitle.className = "text-base font-extrabold text-red-600 mb-1";
+                profileTitle.innerText = "⚠️ Rischio Burnout Immediato";
+                profileAdvice.innerText = "Le tue attività superano le 168 ore settimanali disponibili. Riduci urgentemente gli impegni o il carico di lavoro per salvaguardare la tua salute.";
+            } else {
+                freeHoursDisplay.innerHTML = `${freeHours} ore <span class="text-base font-medium text-gray-600">/ sett</span>`;
+                const daily = (freeHours / 7).toFixed(1);
+                dailyFreeHoursDisplay.innerText = `Circa ${daily} ore al giorno a tua disposizione`;
+
+                if (freeHours < 10) {
+                    resultCard.className = "bg-amber-50 border-2 border-amber-300 rounded-xl p-4 text-center transition-colors";
+                    profileTitle.className = "text-base font-extrabold text-amber-600 mb-1";
+                    profileTitle.innerText = "⚠️ Modalità Sopravvivenza";
+                    profileAdvice.innerText = "Il tuo margine di tempo libero è minimo. Concentrati sulla semplificazione: delega compiti secondari, riduci il tempo perso sullo smartphone e proteggi i tuoi spazi.";
+                } else if (freeHours <= 25) {
+                    resultCard.className = "bg-emerald-50 border-2 border-emerald-300 rounded-xl p-4 text-center transition-colors";
+                    profileTitle.className = "text-base font-extrabold text-emerald-600 mb-1";
+                    profileTitle.innerText = "⚡ Costruttore Costante";
+                    profileAdvice.innerText = "Hai il bilanciamento ideale per fare grandi cose senza stressarti. Dedica 1-2 ore al giorno a un progetto specifico (es. creare contenuti o studiare).";
+                } else {
+                    resultCard.className = "bg-emerald-100 border-2 border-emerald-400 rounded-xl p-4 text-center transition-colors";
+                    profileTitle.className = "text-base font-extrabold text-emerald-700 mb-1";
+                    profileTitle.innerText = "🚀 Massimo Potenziale";
+                    profileAdvice.innerText = "Hai un'ottima quantità di tempo libero. Con la giusta disciplina e senza alibi, puoi accelerare notevolmente il raggiungimento dei tuoi traguardi.";
+                }
+            }
+
+            evaluateGoalFeasibility(freeHours);
+        }
+
+        // Evaluate Goal Section
+        function evaluateGoalFeasibility(availableFreeHours) {
+            const targetHours = parseInt(goalHoursInput.value) || 1;
+            goalHoursVal.innerText = `${targetHours} ${targetHours === 1 ? 'ora' : 'ore'}`;
+
+            const goalType = goalSelect.value;
+            const descFunc = goalDescriptions[goalType] || goalDescriptions.custom;
+            goalDescription.innerText = descFunc(targetHours);
+
+            if (availableFreeHours < 0) {
+                goalOutcome.className = "p-3.5 bg-red-50 rounded-xl border border-red-200 text-xs sm:text-sm";
+                goalStatus.className = "font-bold text-red-700 flex items-center gap-1.5 mb-1";
+                goalStatus.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-500"></i> Non Sostenibile (Tempo insufficiente)`;
+            } else if (targetHours > availableFreeHours) {
+                goalOutcome.className = "p-3.5 bg-amber-50 rounded-xl border border-amber-200 text-xs sm:text-sm";
+                goalStatus.className = "font-bold text-amber-800 flex items-center gap-1.5 mb-1";
+                goalStatus.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Richiede più tempo libero di quello disponibile (${availableFreeHours}h disponibili)`;
+            } else {
+                goalOutcome.className = "p-3.5 bg-emerald-50 rounded-xl border border-emerald-200 text-xs sm:text-sm";
+                goalStatus.className = "font-bold text-emerald-800 flex items-center gap-1.5 mb-1";
+                goalStatus.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i> Obiettivo Perfettamente Sostenibile!`;
+            }
+        }
+
+        // Micro action generator
+        let lastActionIndex = -1;
+        function generateMicroAction() {
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * microActions.length);
+            } while (randomIndex === lastActionIndex);
+
+            lastActionIndex = randomIndex;
+            const actionBox = document.getElementById('actionBox');
+            actionBox.style.opacity = '0';
+            setTimeout(() => {
+                actionBox.innerText = `"${microActions[randomIndex]}"`;
+                actionBox.style.opacity = '1';
+            }, 150);
+        }
+
+        // Copy to clipboard utility
+        function copySummary() {
+            const sleepVal = sleepInput.value;
+            const workVal = workInput.value;
+            const routineVal = routineInput.value;
+            const familyVal = familyInput.value;
+            const totalOccupied = parseInt(sleepVal) + parseInt(workVal) + parseInt(routineVal) + parseInt(familyVal);
+            const freeHours = 168 - totalOccupied;
+
+            const summaryText = `📊 RIEPILOGO TEMPO LIBERO (Life & Time Balance Tool)
+----------------------------------------
+😴 Sonno: ${sleepVal}h/sett
+💼 Lavoro/Studio: ${workVal}h/sett
+🚗 Routine/Faccende: ${routineVal}h/sett
+🍽️ Pasti/Famiglia: ${familyVal}h/sett
+----------------------------------------
+⏳ Ore Libere Residue: ${freeHours}h a settimana (~${(freeHours/7).toFixed(1)}h/giorno)
+🎯 Profilo: ${profileTitle.innerText}
+
+Generato con Digital Creator Lab App 🚀`;
+
+            const triggerToast = () => {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
+                toast.classList.add('opacity-100', 'translate-y-0');
+                setTimeout(() => {
+                    toast.classList.remove('opacity-100', 'translate-y-0');
+                    toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+                }, 2500);
+            };
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(summaryText)
+                    .then(triggerToast)
+                    .catch(() => fallbackCopy(summaryText, triggerToast));
+            } else {
+                fallbackCopy(summaryText, triggerToast);
+            }
+        }
+
+        function fallbackCopy(text, callback) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                if (callback) callback();
+            } catch (err) {
+                console.error("Copia fallita", err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // Bind input sync listeners
+        syncInputs(sleepInput, sleepNum, calculateBalance);
+        syncInputs(workInput, workNum, calculateBalance);
+        syncInputs(routineInput, routineNum, calculateBalance);
+        syncInputs(familyInput, familyNum, calculateBalance);
+
+        goalSelect.addEventListener('change', () => evaluateGoalFeasibility(168 - (parseInt(sleepInput.value) + parseInt(workInput.value) + parseInt(routineInput.value) + parseInt(familyInput.value))));
+        goalHoursInput.addEventListener('input', () => evaluateGoalFeasibility(168 - (parseInt(sleepInput.value) + parseInt(workInput.value) + parseInt(routineInput.value) + parseInt(familyInput.value))));
+
+        // Initial launch calculation
+        calculateBalance();
+    </script>
+</body>
+</html>
